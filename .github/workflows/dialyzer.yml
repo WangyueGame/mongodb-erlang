@@ -9,7 +9,7 @@ jobs:
   dialyzer:
     runs-on: ubuntu-24.04
     container:
-      image: erlang:24-slim
+      image: erlang:27-slim
     steps:
       - uses: actions/checkout@v4
       - name: Cache PLTs
@@ -19,4 +19,4 @@ jobs:
           path: ~/.cache/rebar3/
           key: ${{ runner.os }}-erlang-${{ hashFiles(format('{0}{1}', github.workspace, '/rebar.lock')) }}
       - run: apt-get update && apt-get --yes install git
-      - run: ./rebar3 dialyzer
+      - run: rebar3 dialyzer
