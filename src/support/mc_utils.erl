@@ -11,13 +11,6 @@
 
 -include_lib("kernel/include/inet.hrl").
 
--define(OLD_CRYPTO_API, true).
--ifdef(OTP_RELEASE).
-  -if(?OTP_RELEASE >= 23).
-    -undef(OLD_CRYPTO_API).
-  -endif.
--endif.
-
 %% API
 -export([
   get_value/2,
@@ -74,11 +67,7 @@ get_timeout() ->
     undefined -> infinity
   end.
 
--ifdef(OLD_CRYPTO_API).
-hmac(One, Two) -> crypto:hmac(sha, One, Two).
--else.
 hmac(One, Two) -> crypto:mac(hmac, sha, One, Two).
--endif.
 
 pw_key(Nonce, Username, Password) ->
   bson:utf8(binary_to_hexstr(crypto:hash(md5, [Nonce, Username, pw_hash(Username, Password)]))).

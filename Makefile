@@ -1,24 +1,25 @@
 PROJECT = mongodb
 
 DIALYZER = dialyzer
+REBAR ?= rebar3
 
 all: app
 
 # Application.
 
 deps:
-	./rebar3 get-deps
+	$(REBAR) get-deps
 
 app: deps
-	./rebar3 compile
+	$(REBAR) compile
 
 clean:
-	./rebar3 clean
+	$(REBAR) clean
 	rm -f test/*.beam
 	rm -f erl_crash.dump
 
 docs: clean-docs
-	./rebar3 doc skip_deps=true
+	$(REBAR) doc skip_deps=true
 
 clean-docs:
 	rm -f doc/*.css
@@ -30,13 +31,13 @@ clean-docs:
 tests: report-rebar3-version clean app eunit ct
 
 eunit:
-	./rebar3 eunit skip_deps=true
+	$(REBAR) eunit skip_deps=true
 
 ct: app
-	./rebar3 ct skip_deps=true
+	$(REBAR) ct skip_deps=true
 
 report-rebar3-version:
-	./rebar3 version
+	$(REBAR) version
 
 # Dialyzer.
 .$(PROJECT).plt: 
