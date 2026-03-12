@@ -8,6 +8,5 @@ data
 _build
 .idea
 *.log
-rebar.lock
 *.crashdump
 *.plt
