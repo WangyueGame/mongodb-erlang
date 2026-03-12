@@ -1,0 +1,4 @@
+[{<<"bson">>,
+  {git,"https://github.com/WangyueGame/bson-erlang.git",
+       {ref,"1f9362fadf951cb9dac4bd396cb8ff191d4f0684"}},
+  0}].
